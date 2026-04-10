@@ -338,7 +338,7 @@ export default function AboutPage() {
                 </div>
                 <div className="p-8 pt-0">
                   <a
-                    href="https://github.com"
+                    href="https://github.com/KPRO-tech/Link2Mpx"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/90 transition-colors"
