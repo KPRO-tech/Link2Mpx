@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check authentication
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    // Helper function to check if it's the correct user
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+    
+    // Users collection - each user can read/write their own data
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isSignedIn() && request.auth.uid == userId;
+      allow update: if isOwner(userId);
+      allow delete: if false; // Prevent deletion
+    }
+    
+    // Downloads collection - users can read their own downloads
+    match /downloads/{downloadId} {
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() || request.resource.data.userId == "anonymous";
+      allow update, delete: if false; // No modification/deletion
+    }
+  }
+}

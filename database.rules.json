@@ -1,0 +1,14 @@
+{
+    "rules": {
+        "stats": {
+            ".read": true,
+            ".write": true
+        },
+        "presence": {
+            ".read": true,
+            "$session_id": {
+                ".write": true
+            }
+        }
+    }
+}
