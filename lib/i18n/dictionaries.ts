@@ -25,7 +25,7 @@ export const dictionaries = {
       message:
         "Vous êtes responsable de vos téléchargements. Respectez les droits d'auteur et les conditions d'utilisation des plateformes.",
       learnMore: "En savoir plus",
-      youtubeBlocked: "Le téléchargement YouTube est désactivé sur notre instance principale en raison des restrictions de YouTube et des coûts de maintenance élevés. Merci de votre compréhension.",
+      youtubeBlocked: "Le téléchargement depuis YouTube est désactivé sur notre instance principale en raison de restrictions côté YouTube. Nous vous présentons nos excuses pour la gêne occasionnée.",
     },
     stats: {
       onlineUsers: "utilisateurs en ligne",
@@ -215,6 +215,18 @@ export const dictionaries = {
       description: "Oups ! Il semblerait que le lien que vous avez suivi soit cassé ou que la page ait été déplacée.",
       backHome: "Retourner à l'accueil",
     },
+    zipModal: {
+      ready: "Archive prête !",
+      error: "Erreur",
+      title: "Création de l'archive ZIP",
+      downloading: "Téléchargement",
+      compressing: "Compression en cours...",
+      files: "fichier(s)",
+      errorOccurred: "Une erreur est survenue",
+      fetchingFiles: "Récupération des fichiers depuis le serveur...",
+      downloadStarted: "Téléchargement de l'archive lancé !",
+      filesFailed: "n'ont pas pu être récupérés",
+    },
   },
 
 
@@ -243,7 +255,7 @@ export const dictionaries = {
       message:
         "You are responsible for your downloads. Respect copyrights and platform terms of service.",
       learnMore: "Learn more",
-      youtubeBlocked: "YouTube downloading is disabled on our main instance due to restrictions from YouTube and high maintenance costs. Thank you for your understanding.",
+      youtubeBlocked: "Downloading from YouTube is disabled on our main instance due to restrictions from YouTube's side and infinite maintenance cost at scale. We apologize for the inconvenience.",
     },
     stats: {
       onlineUsers: "users online",
@@ -432,6 +444,18 @@ export const dictionaries = {
       subtitle: "Error 404",
       description: "Oops! It seems the link you followed is broken or the page has been moved.",
       backHome: "Back to Home",
+    },
+    zipModal: {
+      ready: "Archive ready!",
+      error: "Error",
+      title: "Creating ZIP archive",
+      downloading: "Downloading",
+      compressing: "Compressing...",
+      files: "file(s)",
+      errorOccurred: "An error occurred",
+      fetchingFiles: "Fetching files from server...",
+      downloadStarted: "Archive download started!",
+      filesFailed: "could not be fetched",
     },
   },
 } as const

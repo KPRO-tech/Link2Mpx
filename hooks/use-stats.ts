@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ref, onValue, onDisconnect, set, push, remove } from "firebase/database"
+import { ref, onValue } from "firebase/database"
 import { rtdb } from "@/lib/firebase/config"
 
 interface Stats {
@@ -25,20 +25,6 @@ export function useStats() {
 
     const statsRef = ref(rtdb, "stats")
     const presenceRef = ref(rtdb, "presence")
-    const connectedRef = ref(rtdb, ".info/connected")
-    
-    // Create a unique reference for this client's presence
-    const myPresenceRef = push(presenceRef)
-
-    const unsubConnected = onValue(connectedRef, (snap) => {
-      if (snap.val() === true) {
-        // When connected, set up the onDisconnect behavior
-        onDisconnect(myPresenceRef).remove().then(() => {
-           // Once onDisconnect is queued on the server, set presence to true
-           set(myPresenceRef, true)
-        })
-      }
-    })
 
     const handleStats = (snapshot: any) => {
       const data = snapshot.val() || {}
@@ -69,11 +55,8 @@ export function useStats() {
     const unsubPresence = onValue(presenceRef, handlePresence, handleError)
 
     return () => {
-      unsubConnected()
       unsubStats()
       unsubPresence()
-      // manually remove presence on unmount
-      remove(myPresenceRef).catch(()=> {})
     }
   }, [])
 

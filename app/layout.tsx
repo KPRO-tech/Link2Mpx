@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes"
 import { Toaster } from "sonner"
 import { I18nProvider } from "@/lib/i18n/context"
 import { AuthProvider } from "@/lib/firebase/auth-context"
+import { PresenceTracker } from "@/components/presence-tracker"
 import "./globals.css"
 
 const inter = Inter({
@@ -62,12 +63,13 @@ export default function RootLayout({
         >
           <I18nProvider>
             <AuthProvider>
+              <PresenceTracker />
               {children}
               <Toaster
                 richColors
                 position="top-right"
                 toastOptions={{
-                  className: "glass",
+                  className: "!bg-card !text-foreground !border-border shadow-lg",
                 }}
               />
             </AuthProvider>
