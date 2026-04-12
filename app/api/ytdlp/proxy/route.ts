@@ -31,6 +31,11 @@ export async function GET(req: Request) {
     headers.set("Content-Type", response.headers.get("Content-Type") || "application/octet-stream");
     headers.set("Content-Length", blob.size.toString());
     
+    const filename = searchParams.get("filename");
+    if (filename) {
+      headers.set("Content-Disposition", `attachment; filename="${encodeURIComponent(filename)}"`);
+    }
+
     // Allow streaming from client
     headers.set("Access-Control-Allow-Origin", "*");
 

@@ -227,6 +227,18 @@ export const dictionaries = {
       downloadStarted: "Téléchargement de l'archive lancé !",
       filesFailed: "n'ont pas pu être récupérés",
     },
+    comingSoon: {
+      title: "Votre future plateforme",
+      launchingIn: "Lancement dans",
+      days: "Jours",
+      hours: "Heures",
+      minutes: "Minutes",
+      seconds: "Secondes",
+      kproTitle: "Développé par",
+      kproTagline: "Tech Over Everything",
+      kproDesc: "KPRO.tech est votre partenaire pour l'innovation technologique et digitale. Spécialisé en SaaS et multimédia, nous construisons le futur avec excellence.",
+      kproVisit: "Visiter le créateur"
+    },
   },
 
 
@@ -456,6 +468,19 @@ export const dictionaries = {
       fetchingFiles: "Fetching files from server...",
       downloadStarted: "Archive download started!",
       filesFailed: "could not be fetched",
+    },
+    comingSoon: {
+      title: "Your future platform",
+      subtitle: "A glimpse of the tool designed to simplify all your downloads.",
+      launchingIn: "Launching in",
+      days: "Days",
+      hours: "Hours",
+      minutes: "Minutes",
+      seconds: "Seconds",
+      kproTitle: "Developed by",
+      kproTagline: "Tech Over Everything",
+      kproDesc: "KPRO.tech is your partner for technological and digital innovation. Specialized in SaaS and multimedia, we build the future with excellence.",
+      kproVisit: "Visit creator"
     },
   },
 } as const
