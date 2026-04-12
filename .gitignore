@@ -14,4 +14,3 @@ firestore.rules
 database.rules.json
 
 # Large files
-public/*.mp4
