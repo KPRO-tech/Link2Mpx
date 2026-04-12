@@ -214,7 +214,7 @@ export default function ComingSoonPage() {
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover"
               >
-                <source src="/Link2Mpx-out.mp4" type="video/mp4" />
+                <source src="https://dec87feztafwked6.public.blob.vercel-storage.com/Link2Mpx-out.mp4" type="video/mp4" />
               </video>
               <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent pointer-events-none" />
             </div>
