@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ref, onValue } from "firebase/database"
+import { ref, onValue, runTransaction } from "firebase/database"
 import { rtdb } from "@/lib/firebase/config"
 
 interface Stats {
@@ -9,6 +9,7 @@ interface Stats {
   totalUsers: number
   totalDownloadsToday: number
   totalDownloads: number
+  lastResetDate?: string
 }
 
 export function useStats() {
@@ -28,11 +29,29 @@ export function useStats() {
 
     const handleStats = (snapshot: any) => {
       const data = snapshot.val() || {}
+      const today = new Date().toISOString().split("T")[0]
+
+      // Check if we need to reset the daily counter
+      if (data.lastResetDate !== today) {
+        const statsRef = ref(rtdb, "stats")
+        runTransaction(statsRef, (currentData) => {
+          if (currentData && currentData.lastResetDate !== today) {
+            return {
+              ...currentData,
+              totalDownloadsToday: 0,
+              lastResetDate: today,
+            }
+          }
+          return currentData
+        })
+      }
+
       setStats((prev) => ({
         ...prev,
         totalUsers: data.totalUsers || 0,
         totalDownloadsToday: data.totalDownloadsToday || 0,
         totalDownloads: data.totalDownloads || 0,
+        lastResetDate: data.lastResetDate,
       }))
     }
 
