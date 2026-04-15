@@ -163,7 +163,7 @@ export function HeroSection({ onAnalyze, isAnalyzing }: HeroSectionProps) {
               </div>
               <div className="w-full bg-background/50 text-xs text-muted-foreground text-left px-4 py-2 border-t border-foreground/5 flex items-center gap-2">
                 <span><LightbulbIcon className="h-4 w-4" /></span>
-                <span>Astuce : Ajoutez plusieurs liens en les séparant par des espaces ou des retours à la ligne.</span>
+                <span>{t.hero.helper}</span>
               </div>
             </div>
 

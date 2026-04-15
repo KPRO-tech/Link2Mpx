@@ -19,6 +19,7 @@ export const dictionaries = {
       placeholder: "Collez votre lien ici (Facebook, TikTok, Instagram...)",
       analyze: "Analyser",
       topPlatforms: "Plateformes populaires",
+      helper: "Astuce : Ajoutez plusieurs liens en les séparant par des espaces ou des retours à la ligne.",
     },
     warning: {
       title: "Responsabilité",
@@ -26,6 +27,7 @@ export const dictionaries = {
         "Vous êtes responsable de vos téléchargements. Respectez les droits d'auteur et les conditions d'utilisation des plateformes.",
       learnMore: "En savoir plus",
       youtubeBlocked: "Le téléchargement depuis YouTube est désactivé sur notre instance principale en raison de restrictions côté YouTube. Nous vous présentons nos excuses pour la gêne occasionnée.",
+      instagramBlocked: "Le téléchargement depuis Instagram est temporairement limité par les protections du réseau de Meta. Une mise à niveau de l'infrastructure est en cours.",
     },
     stats: {
       onlineUsers: "utilisateurs en ligne",
@@ -66,6 +68,7 @@ export const dictionaries = {
       format: "Format",
       size: "Taille",
       downloadBtn: "Télécharger",
+      downloadAll: "Télécharger Tout",
       downloading: "Téléchargement...",
       analyzing: "Analyse en cours...",
       duration: "Durée",
@@ -261,6 +264,7 @@ export const dictionaries = {
       placeholder: "Paste your link here (Facebook, TikTok, Instagram...)",
       analyze: "Analyze",
       topPlatforms: "Top platforms",
+      helper: "Tip: Add multiple links separated by spaces or line breaks.",
     },
     warning: {
       title: "Responsibility",
@@ -268,6 +272,7 @@ export const dictionaries = {
         "You are responsible for your downloads. Respect copyrights and platform terms of service.",
       learnMore: "Learn more",
       youtubeBlocked: "Downloading from YouTube is disabled on our main instance due to restrictions from YouTube's side and infinite maintenance cost at scale. We apologize for the inconvenience.",
+      instagramBlocked: "Downloading from Instagram is temporarily limited by Meta's network protections. An infrastructure upgrade is in progress.",
     },
     stats: {
       onlineUsers: "users online",
@@ -308,6 +313,7 @@ export const dictionaries = {
       format: "Format",
       size: "Size",
       downloadBtn: "Download",
+      downloadAll: "Download All",
       downloading: "Downloading...",
       analyzing: "Analyzing...",
       duration: "Duration",

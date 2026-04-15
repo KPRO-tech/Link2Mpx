@@ -45,8 +45,17 @@ export async function POST(req: Request) {
 
     if (data.error) {
       console.error("[ytdlp API] Backend error:", data.error);
+      
+      let clientError = "Nous n'avons pas pu analyser ce lien. Veuillez vérifier l'URL ou réessayer plus tard. / We could not analyze this link. Please check the URL or try again later.";
+      
+      if (data.error.includes("login required") || data.error.includes("rate-limit reached")) {
+        clientError = "Instagram bloque actuellement les téléchargements anonymes sur ce serveur. Une mise à jour des cookies est nécessaire. / Instagram is currently blocking anonymous downloads on this server. A cookies update is required.";
+      } else if (data.error.includes("Private video") || data.error.includes("is a private video")) {
+        clientError = "Cette vidéo Instagram est privée et ne peut pas être téléchargée. / This Instagram video is private and cannot be downloaded.";
+      }
+
       return NextResponse.json(
-        { success: false, error: "Nous n'avons pas pu analyser ce lien. Veuillez vérifier l'URL ou réessayer plus tard. / We could not analyze this link. Please check the URL or try again later." },
+        { success: false, error: clientError },
         { status: 400 }
       );
     }

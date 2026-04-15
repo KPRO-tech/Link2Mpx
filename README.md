@@ -329,10 +329,11 @@ CMD ["gunicorn", "--bind", "0.0.0.0:7860", "--timeout", "600", "--workers", "2",
    a. Go to **youtube.com** and log in to a Google account. Click the extension icon → **"Export"**. This will download a file (e.g., `youtube_cookies.txt`).
    b. Go to **facebook.com** and log in. Use the extension again to export `facebook_cookies.txt`.
    c. Go to **reddit.com** and log in. Export `reddit_cookies.txt`.
-   d. Open all three downloaded text files on your computer.
-   e. Create a new, blank text file named `cookies.txt`.
-   f. Copy the entire contents of all three files and paste them one after the other into your single `cookies.txt` file.
-   g. Save the combined `cookies.txt` file.
+   d. Go to **instagram.com** and log in. Use the extension again to export `instagram_cookies.txt`.
+   e. Open all three downloaded text files on your computer.
+   f. Create a new, blank text file named `cookies.txt`.
+   g. Copy the entire contents of all three files and paste them one after the other into your single `cookies.txt` file.
+   h. Save the combined `cookies.txt` file.
 
 
     > **[🔴WARNING🔴]**

@@ -67,6 +67,7 @@ export default function RootLayout({
               {children}
               <Toaster
                 richColors
+                closeButton
                 position="top-right"
                 toastOptions={{
                   className: "!bg-card !text-foreground !border-border shadow-lg",

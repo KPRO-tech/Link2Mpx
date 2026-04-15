@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Download, Loader2, XCircle, CheckCircle2, Pencil } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useI18n } from "@/lib/i18n/context"
 
 export type QueueItem = {
   id: string
@@ -25,6 +26,8 @@ interface DownloadQueueProps {
 export function DownloadQueue({ items, onDownload, onRemove, onDownloadAll, onRename }: DownloadQueueProps) {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editValue, setEditValue] = useState("")
+  const [downloadingIds, setDownloadingIds] = useState<Set<string>>(new Set())
+  const { t } = useI18n()
 
   if (items.length === 0) return null
 
@@ -41,6 +44,20 @@ export function DownloadQueue({ items, onDownload, onRemove, onDownloadAll, onRe
       onRename(id, editValue.trim())
     }
     setEditingId(null)
+  }
+
+  const handleDownloadClick = (item: QueueItem) => {
+    setDownloadingIds((prev) => new Set(prev).add(item.id))
+    onDownload(item.downloadUrl!, item.customName ? `${item.customName}.${item.format}` : `video_${item.id}.${item.format}`)
+    
+    // Reset loading state after a short delay since download triggers externally
+    setTimeout(() => {
+      setDownloadingIds((prev) => {
+        const next = new Set(prev)
+        next.delete(item.id)
+        return next
+      })
+    }, 2000)
   }
 
   return (
@@ -99,11 +116,21 @@ export function DownloadQueue({ items, onDownload, onRemove, onDownloadAll, onRe
               )}
               {item.status === "ready" && item.downloadUrl && (
                 <button
-                  onClick={() => onDownload(item.downloadUrl!, item.customName ? `${item.customName}.${item.format}` : `video_${item.id}.${item.format}`)}
-                  className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl text-sm font-bold hover:bg-primary/90 transition-colors"
+                  onClick={() => handleDownloadClick(item)}
+                  disabled={downloadingIds.has(item.id)}
+                  className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-xl text-sm font-bold hover:bg-primary/90 disabled:opacity-50 transition-colors"
                 >
-                  <Download className="h-4 w-4" />
-                  Télécharger
+                  {downloadingIds.has(item.id) ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      {t.download.downloading}
+                    </>
+                  ) : (
+                    <>
+                      <Download className="h-4 w-4" />
+                      {t.download.downloadBtn}
+                    </>
+                  )}
                 </button>
               )}
               <button
@@ -129,7 +156,7 @@ export function DownloadQueue({ items, onDownload, onRemove, onDownloadAll, onRe
             className="px-6 py-3 bg-secondary text-secondary-foreground rounded-xl font-bold text-sm hover:bg-secondary/80 disabled:opacity-50 transition-all flex items-center gap-2"
           >
             <Download className="h-4 w-4" />
-            Télécharger Tout
+            {t.download.downloadAll}
           </button>
         </motion.div>
       )}

@@ -14,6 +14,7 @@ import {
   LogOut,
   Globe,
   ChevronDown,
+  Github,
 } from "lucide-react"
 import { useI18n } from "@/lib/i18n/context"
 import { useAuth } from "@/lib/firebase/auth-context"
@@ -97,6 +98,17 @@ export function Navbar({ onOpenAuth }: NavbarProps) {
 
         {/* Right Side */}
         <div className="flex items-center gap-2">
+          {/* GitHub Link */}
+          <a
+            href={process.env.NEXT_PUBLIC_SITE_URL || "https://github.com/KPRO-tech/Link2Mpx"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 rounded-lg text-foreground/80 hover:text-foreground hover:bg-secondary/50 transition-colors hidden sm:block"
+            aria-label="GitHub Repository"
+          >
+            <Github className="h-5 w-5" />
+          </a>
+
           {/* Language Toggle */}
           <button
             onClick={() => setLocale(locale === "fr" ? "en" : "fr")}

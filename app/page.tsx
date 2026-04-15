@@ -368,6 +368,14 @@ export default function YtdlpTestPage() {
         setQueue(prev => prev.map(q => q.id === item.id ? { ...q, status: "error", errorMsg: "YouTube \u274c" } : q))
         continue
       }
+      
+      // Check Instagram
+      if (urlLower.includes("instagram.com")) {
+        const warningText = (t.warning as any).instagramBlocked || "Instagram downloading is temporarily limited."
+        toast.error(warningText, { duration: 6000 })
+        setQueue(prev => prev.map(q => q.id === item.id ? { ...q, status: "error", errorMsg: "Instagram \u274c" } : q))
+        continue
+      }
 
       if (!canDownload) {
         toast.error(t.download.quotaExhausted)
