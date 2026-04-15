@@ -15,7 +15,7 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* <Navbar onOpenAuth={() => setAuthOpen(true)} /> */}
+      <Navbar onOpenAuth={() => setAuthOpen(true)} />
 
       <main className="flex-grow flex items-center justify-center px-4 py-20">
         <div className="max-w-md w-full text-center space-y-8">
@@ -67,13 +67,13 @@ export default function NotFound() {
             transition={{ delay: 0.5, duration: 0.5 }}
             className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
           >
-            {/* <Link
+            <Link
               href="/"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20"
             >
               <Home className="h-4 w-4" />
               {t.notFound.backHome}
-            </Link> */}
+            </Link>
 
             <button
               onClick={() => window.history.back()}
