@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
     if (isInstagram) {
       // Stratégie Cobalt pour Instagram
-      const cobaltApiUrl = process.env.NEXT_PUBLIC_COBALT_API_URL || "https://api.cobalt.tools"; // Fallback vers API publique au cas où
+      const cobaltApiUrl = process.env.NEXT_PUBLIC_COBALT_API_URL;
 
       const cobaltBody: any = {
         url: url,
