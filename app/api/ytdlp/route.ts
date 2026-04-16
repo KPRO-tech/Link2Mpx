@@ -13,62 +13,111 @@ export async function POST(req: Request) {
       );
     }
 
-    // URL du serveur yt-dlp sur HuggingFace
-    const apiBaseUrl =
-      process.env.NEXT_PUBLIC_YTDLP_API_URL;
+    const isInstagram = url.toLowerCase().includes("instagram.com");
 
-    // Étape 1 : Demander le téléchargement au serveur yt-dlp
-    const downloadResponse = await fetch(`${apiBaseUrl}/download`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        url,
-        format: format || "mp4",
-      }),
-    });
+    if (isInstagram) {
+      // Stratégie Cobalt pour Instagram
+      const cobaltApiUrl = process.env.NEXT_PUBLIC_COBALT_API_URL || "https://api.cobalt.tools"; // Fallback vers API publique au cas où
 
-    if (!downloadResponse.ok) {
-      const errorData = await downloadResponse.json().catch(() => null);
-      console.error("[ytdlp API] Proxy error:", errorData?.error || `HTTP ${downloadResponse.status}`);
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Nous n'avons pas pu analyser ce lien. Veuillez vérifier l'URL ou réessayer plus tard. / We could not analyze this link. Please check the URL or try again later.",
+      const cobaltBody: any = {
+        url: url,
+        filenameStyle: "basic"
+      };
+
+      if (format === "mp3") {
+        cobaltBody.downloadMode = "audio";
+        cobaltBody.audioFormat = "mp3";
+      }
+
+      const response = await fetch(`${cobaltApiUrl}`, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
         },
-        { status: downloadResponse.status }
-      );
-    }
+        body: JSON.stringify(cobaltBody),
+      });
 
-    const data = await downloadResponse.json();
+      if (!response.ok) {
+        console.error("[Cobalt API] Error HTTP:", response.status);
+        return NextResponse.json(
+          { success: false, error: "Impossible de récupérer ce lien Instagram avec Cobalt. / Unable to fetch this Instagram link via Cobalt." },
+          { status: 400 }
+        );
+      }
 
-    if (data.error) {
-      console.error("[ytdlp API] Backend error:", data.error);
-      
-      let clientError = "Nous n'avons pas pu analyser ce lien. Veuillez vérifier l'URL ou réessayer plus tard. / We could not analyze this link. Please check the URL or try again later.";
-      
-      if (data.error.includes("login required") || data.error.includes("rate-limit reached")) {
-        clientError = "Instagram bloque actuellement les téléchargements anonymes sur ce serveur. Une mise à jour des cookies est nécessaire. / Instagram is currently blocking anonymous downloads on this server. A cookies update is required.";
-      } else if (data.error.includes("Private video") || data.error.includes("is a private video")) {
-        clientError = "Cette vidéo Instagram est privée et ne peut pas être téléchargée. / This Instagram video is private and cannot be downloaded.";
+      const data = await response.json();
+
+      if (data.status === "error") {
+        console.error("[Cobalt API] Backend error:", data.error?.code);
+        return NextResponse.json(
+          { success: false, error: `Erreur Cobalt: ${data.error?.code || "Inconnue"}` },
+          { status: 400 }
+        );
+      }
+
+      // "tunnel" ou "redirect" contiennent l'URL de téléchargement direct
+      if (data.status === "tunnel" || data.status === "redirect") {
+        return NextResponse.json({
+          success: true,
+          downloadUrl: data.url,
+          title: data.filename || "instagram_video",
+          fileSize: 0,
+        });
       }
 
       return NextResponse.json(
-        { success: false, error: clientError },
-        { status: 400 }
+        { success: false, error: "Format de réponse inattendu de Cobalt / Unexpected Cobalt response format" },
+        { status: 500 }
       );
+
+    } else {
+      // Stratégie yt-dlp d'origine
+      const apiBaseUrl = process.env.NEXT_PUBLIC_YTDLP_API_URL;
+
+      const downloadResponse = await fetch(`${apiBaseUrl}/download`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url,
+          format: format || "mp4",
+        }),
+      });
+
+      if (!downloadResponse.ok) {
+        const errorData = await downloadResponse.json().catch(() => null);
+        console.error("[ytdlp API] Proxy error:", errorData?.error || `HTTP ${downloadResponse.status}`);
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Nous n'avons pas pu analyser ce lien. Veuillez vérifier l'URL ou réessayer plus tard. / We could not analyze this link. Please check the URL or try again later.",
+          },
+          { status: downloadResponse.status }
+        );
+      }
+
+      const data = await downloadResponse.json();
+
+      if (data.error) {
+        console.error("[ytdlp API] Backend error:", data.error);
+        return NextResponse.json(
+          { success: false, error: data.error },
+          { status: 400 }
+        );
+      }
+
+      const fileUrl = `${apiBaseUrl}${data.download_url}`;
+
+      return NextResponse.json({
+        success: true,
+        downloadUrl: fileUrl,
+        title: data.title || "video",
+        fileSize: data.size || 0,
+      });
     }
 
-    // Étape 2 : Construire l'URL du fichier téléchargeable
-    const fileUrl = `${apiBaseUrl}${data.download_url}`;
-
-    return NextResponse.json({
-      success: true,
-      downloadUrl: fileUrl,
-      title: data.title || "video",
-      fileSize: data.size || 0,
-    });
   } catch (error) {
     console.error("[ytdlp API]", error);
     return NextResponse.json(

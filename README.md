@@ -349,6 +349,29 @@ CMD ["gunicorn", "--bind", "0.0.0.0:7860", "--timeout", "600", "--workers", "2",
 
 8. Run `npm run dev` and enjoy your downloads!
 
+### 2B. Setting up Cobalt API (Fallback for Instagram)
+
+Since Instagram has very strict protections, Link2Mpx uses a hybrid approach. It defaults to the `yt-dlp` backend, but automatically fallbacks to an instance of **Cobalt** whenever an `instagram.com` link is detected. To get the best stability, you should host your own Cobalt container.
+
+**Deploying Cobalt on HuggingFace (Docker Space):**
+
+1. Create a new Space on [HuggingFace](https://huggingface.co/spaces) and name it something like `cobalt-api`.
+2. Choose **Docker** as the Space SDK and pick the **Blank** template.
+3. In the new space, create a file named `Dockerfile` and add this exact single line:
+   ```dockerfile
+   FROM ghcr.io/imputnet/cobalt:10
+   ```
+4. Go to the **Settings** of your Space, scroll to **Variables and secrets**.
+5. Add the following **Variables** (DO NOT put them in secrets):
+   - `API_PORT` : `7860`  (Required for HuggingFace Docker spaces)
+   - `API_URL` : `https://your-huggingface-username-cobalt-api.hf.space` (Replace with the Direct URL of your space)
+6. Restart your Space. Once it says "Running", your API is ready.
+7. Go to `.env.local` in your Link2Mpx project and add:
+   ```env
+   NEXT_PUBLIC_COBALT_API_URL=https://your-huggingface-username-cobalt-api.hf.space
+   ```
+8. Restart your development server. Instagram links will now automatically use this backend!
+
 ## 🤝 Contributing
 Contributions are totally welcome! Whether it's adding new platforms, fixing UI bugs, or localizing new languages, just open a Pull Request.
 
