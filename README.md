@@ -101,7 +101,7 @@ def get_cookie_args():
 def get_youtube_args():
     """Arguments speciaux pour YouTube pour contourner la detection bot."""
     return [
-        "--extractor-args", "youtube:player_client=ios,web",
+        "--extractor-args", "youtube:player_client=ios",
     ]
 
 
@@ -116,14 +116,20 @@ def health():
                 cookie_info["lines"] = len(content.splitlines())
                 cookie_info["has_youtube"] = ".youtube.com" in content
                 cookie_info["has_reddit"] = ".reddit.com" in content
+                cookie_info["has_instagram"] = ".instagram.com" in content
                 cookie_info["has_facebook"] = ".facebook.com" in content
         except:
             pass
 
+    try:
+        ytdlp_ver = subprocess.check_output(["yt-dlp", "--version"], text=True).strip()
+    except:
+        ytdlp_ver = "unknown"
     return jsonify({
         "status": "ok",
         "service": "Link2Mpx yt-dlp API",
-        "version": "1.2.0",
+        "ytdlp_version": ytdlp_ver,  # Ajout de la vraie version
+        "api_version": "1.2.0",
         "cookies": HAS_COOKIES,
         "cookie_info": cookie_info
     })
