@@ -99,14 +99,6 @@ export function Footer() {
               {t.footer.community}
             </h4>
             <a
-              href="https://github.com/KPRO-tech"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {t.footer.github} KPRO-tech
-            </a>
-            <a
               href="https://github.com/KPRO-tech/Link2Mpx"
               target="_blank"
               rel="noopener noreferrer"
@@ -114,6 +106,15 @@ export function Footer() {
             >
               {t.footer.contribute}
             </a>
+            <Link
+              href="https://paystack.shop/pay/link2mpx-donation"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {t.nav.donate}
+            </Link>
+
             <span className="text-xs text-muted-foreground">
               {t.footer.license}
             </span>

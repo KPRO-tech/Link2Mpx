@@ -382,4 +382,7 @@ Since Instagram has very strict protections, Link2Mpx uses a hybrid approach. It
 Contributions are totally welcome! Whether it's adding new platforms, fixing UI bugs, or localizing new languages, just open a Pull Request.
 
 ## Support us
-If you find this project useful, consider supporting us by giving a star ⭐ on GitHub and sharing it with your friends.
+If you find this project useful, consider supporting us by:
+- giving a star ⭐ on GitHub
+- sharing it with your friends
+- or **[making a donation](https://paystack.shop/pay/link2mpx-donation)**.

@@ -10,6 +10,7 @@ export const dictionaries = {
       profile: "Profil",
       logout: "Déconnexion",
       language: "Langue",
+      donate: "Faire un don",
     },
     hero: {
       title: "Link2Mpx",
@@ -242,6 +243,27 @@ export const dictionaries = {
       kproDesc: "KPRO.tech est votre partenaire pour l'innovation technologique et digitale. Spécialisé en SaaS et multimédia, nous construisons le futur avec excellence.",
       kproVisit: "Visiter le créateur"
     },
+    donate: {
+      title: "Soutenez Link2Mpx",
+      subtitle: "Votre don nous aide à garder ce service 100% gratuit, rapide et sans publicité.",
+      whyImportant: "Pourquoi faire un don ?",
+      reason1Title: "Hébergement & Serveurs",
+      reason1Desc: "Maintenir des serveurs rapides pour télécharger vos vidéos en haute qualité coûte cher.",
+      reason2Title: "Mises à jour constantes",
+      reason2Desc: "Les réseaux sociaux changent souvent leurs protections. Nous devons adapter notre code en permanence.",
+      reason3Title: "Zéro Publicité",
+      reason3Desc: "Nous refusons d'ajouter des publicités intrusives. Votre soutien est notre seul revenu.",
+      impactTitle: "L'impact de votre don",
+      impactDesc: "Chaque centime est réinvesti dans l'infrastructure de Link2Mpx. Votre argent ne sera pas jeté par les fenêtres, il servira directement à améliorer la plateforme et payer les serveurs.",
+      donateBtn: "Faire un don maintenant",
+      securePayment: "Paiement sécurisé via Paystack",
+    },
+    thankyou: {
+      title: "Merci de tout cœur!",
+      subtitle: "Votre paiement a été traité avec succès.",
+      message: "Grâce à votre générosité, Link2Mpx peut continuer à offrir un service gratuit, sans publicité et performant à des milliers d'utilisateurs. Votre soutien compte énormément pour nous.",
+      backHome: "Retourner à l'accueil",
+    },
   },
 
 
@@ -255,6 +277,7 @@ export const dictionaries = {
       profile: "Profile",
       logout: "Logout",
       language: "Language",
+      donate: "Donate",
     },
     hero: {
       title: "Link2Mpx",
@@ -487,6 +510,27 @@ export const dictionaries = {
       kproTagline: "Tech Over Everything",
       kproDesc: "KPRO.tech is your partner for technological and digital innovation. Specialized in SaaS and multimedia, we build the future with excellence.",
       kproVisit: "Visit creator"
+    },
+    donate: {
+      title: "Support Link2Mpx",
+      subtitle: "Your donation helps us keep this service 100% free, fast, and ad-free.",
+      whyImportant: "Why donate?",
+      reason1Title: "Hosting & Servers",
+      reason1Desc: "Maintaining fast servers to download your videos in high quality is expensive.",
+      reason2Title: "Constant Updates",
+      reason2Desc: "Social networks frequently change their protections. We have to constantly adapt our code.",
+      reason3Title: "Zero Ads",
+      reason3Desc: "We refuse to add intrusive ads. Your support is our only income.",
+      impactTitle: "The impact of your donation",
+      impactDesc: "Every penny is reinvested in Link2Mpx's infrastructure. Your money won't go to waste; it will directly improve the platform and pay for servers.",
+      donateBtn: "Donate now",
+      securePayment: "Secure payment via Paystack",
+    },
+    thankyou: {
+      title: "Thank you from the bottom of our hearts!",
+      subtitle: "Your payment has been successfully processed.",
+      message: "Thanks to your generosity, Link2Mpx can continue to offer a free, ad-free, and high-performance service to thousands of users. Your support means the world to us.",
+      backHome: "Back to Home",
     },
   },
 } as const

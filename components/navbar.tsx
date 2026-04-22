@@ -15,6 +15,7 @@ import {
   Globe,
   ChevronDown,
   Github,
+  Heart,
 } from "lucide-react"
 import { useI18n } from "@/lib/i18n/context"
 import { useAuth } from "@/lib/firebase/auth-context"
@@ -93,6 +94,13 @@ export function Navbar({ onOpenAuth }: NavbarProps) {
             className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
           >
             {t.nav.faq}
+          </Link>
+          <Link
+            href="/donate"
+            className="text-sm font-bold text-green-500 hover:text-primary transition-colors flex items-center gap-1.5"
+          >
+            <Heart className="h-4 w-4" fill="currentColor" />
+            {t.nav.donate}
           </Link>
         </div>
 
@@ -231,6 +239,14 @@ export function Navbar({ onOpenAuth }: NavbarProps) {
                 className="px-3 py-2 rounded-lg text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-secondary/50 transition-colors"
               >
                 {t.nav.faq}
+              </Link>
+              <Link
+                href="/donate"
+                onClick={() => setMobileOpen(false)}
+                className="px-3 py-2 rounded-lg text-sm font-bold text-green-500 hover:text-primary hover:bg-primary/10 transition-colors flex items-center gap-2"
+              >
+                <Heart className="h-4 w-4" fill="currentColor" />
+                {t.nav.donate}
               </Link>
             </div>
           </motion.div>
